@@ -1,29 +1,79 @@
+
 #ifndef JOS_INC_MMU_H
 #define JOS_INC_MMU_H
 
-// +----12---+----8----+----12---+
-// |   PDX   |   PTX   |  PGOFF  |
-// +---------+---------+---------+
+/*
+ *
+ *	Part 1.  Paging data structures and constants.
+ *
+ */
 
-#define PDXSHIFT    20
-#define PTSIZE      (1 << PDXSHIFT)
-#define PDX(va)     ((((uint32_t)(va)) >> PDXSHIFT) & 0xFFF)
+// A linear address 'la' has a three-part structure as follows:
+//
+// +--------12------+-------8--------+---------12----------+
+// | Page Directory |   Page Table   | Offset within Page  |
+// |      Index     |      Index     |                     |
+// +----------------+----------------+---------------------+
+//  \--- PDX(la) --/ \--- PTX(la) --/ \---- PGOFF(la) ----/
+//  \---------- PGNUM(la) ----------/
+//
+// The PDX, PTX, PGOFF, and PGNUM macros decompose linear addresses as shown.
+// To construct a linear address la from PDX(la), PTX(la), and PGOFF(la),
+// use PGADDR(PDX(la), PTX(la), PGOFF(la)).
 
-#define PTXSHIFT    12
-#define PGSIZE      (1 << PTXSHIFT)
-#define PTX(va)     ((((uint32_t)(va)) >> PTXSHIFT) & 0xFF)
+// page number field of address
+#define PGNUM(la)	(((uintptr_t) (la)) >> PTXSHIFT)
 
-#define PGNUM(va)   (((uint32_t)(va)) >> PTXSHIFT)
-#define PGOFF(va)   (((uint32_t)(va)) & 0xFFF)
-#define PGADDR(d, t, o)     ((void*)((d) << PDXSHIFT | (t) << PTXSHIFT | (o)))
+// page directory index
+#define PDX(la)		(((uintptr_t) (la)) >> PDXSHIFT)
 
-#define NPDENTRIES  4096
-#define NPTENTRIES  256
+// page table index
+#define PTX(la)		((((uintptr_t) (la)) >> PTXSHIFT) & 0xFF)
 
-#define PDE_ADDR(pde)       ((uint32_t)(pde) & ~0x3FF)
-#define PTE_SMALL_ADDR(pte) ((uint32_t)(pte) & ~0xFFF)
-#define PTE_LARGE_ADDR(pte) ((uint32_t)(pte) & ~0xFFFF)
+// offset in page
+#define PGOFF(la)	(((uintptr_t) (la)) & 0xFFF)
 
-#define SCTLR_M     0x1
+// construct linear address from indexes and offset
+#define PGADDR(d, t, o)	((void*) ((d) << PDXSHIFT | (t) << PTXSHIFT | (o)))
+ 
+// Page directory and page table constants.
+#define NPDENTRIES	4096		// page directory entries per page directory
+#define NPTENTRIES	256		// page table entries per page table
 
-#endif /* !JOS_INC_MMU_H */
+#define PGSIZE		4096		// bytes mapped by a page
+#define PGSHIFT		12		// log2(PGSIZE)
+
+#define PTSIZE		(PGSIZE*NPTENTRIES) // bytes mapped by a page directory entry
+#define PTSHIFT		20		// log2(PTSIZE)
+
+#define PTXSHIFT	12		// offset of PTX in a linear address
+#define PDXSHIFT	20		// offset of PDX in a linear address
+
+#define PDE_ADDR(pde)	((physaddr_t) (pde) & ~0x3FF)
+#define PTE_SMALL_ADDR(pte)   ((physaddr_t) (pte) & ~0xFFF)
+#define PTE_LARGE_ADDR(pte)   ((physaddr_t) (pte) & ~0xFFFF)
+
+#define PDE_RDONLY (1<<9)
+#define PDE_APX (1<<15)
+#define PDE_NONE_ALL 0
+#define PDE_NONE_U (1 << 10)
+#define PDE_R_U (2 << 10)
+#define PDE_RW_U (3 << 10)
+#define PDE_1MB_ENTRY (0x2)
+#define PDE_16MB_ENTRY ((0x2) | (1 << 18))
+#define PDE_ENTRY (0x1)
+
+#define PDE_P (0x3)
+
+#define PTE_APX (1 << 9)
+#define PTE_NONE_ALL 0
+#define PTE_NONE_U (1 << 4)
+#define PTE_R_U (2 << 4)
+#define PTE_RW_U (3 << 4)
+#define PTE_ENTRY_SMALL (0x2)
+#define PTE_ENTRY_LARGE (0x1)
+
+#define PTE_P (0x3)
+
+
+#endif
