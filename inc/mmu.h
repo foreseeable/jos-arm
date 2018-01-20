@@ -1,4 +1,3 @@
-
 #ifndef JOS_INC_MMU_H
 #define JOS_INC_MMU_H
 
@@ -49,7 +48,7 @@
 #define PTXSHIFT	12		// offset of PTX in a linear address
 #define PDXSHIFT	20		// offset of PDX in a linear address
 
-#define PDE_ADDR(pde)	((physaddr_t) (pde) & ~0x3FF)
+#define PDE_ADDR(pde)	((physaddr_t) (pde) & ~0xFFF)
 #define PTE_SMALL_ADDR(pte)   ((physaddr_t) (pte) & ~0xFFF)
 #define PTE_LARGE_ADDR(pte)   ((physaddr_t) (pte) & ~0xFFFF)
 
@@ -59,8 +58,8 @@
 #define PDE_NONE_U (1 << 10)
 #define PDE_R_U (2 << 10)
 #define PDE_RW_U (3 << 10)
-#define PDE_1MB_ENTRY (0x2)
-#define PDE_16MB_ENTRY ((0x2) | (1 << 18))
+#define PDE_ENTRY_1M (0x2)
+#define PDE_ENTRY_16M ((0x2) | (1 << 18))
 #define PDE_ENTRY (0x1)
 
 #define PDE_P (0x3)
@@ -75,5 +74,9 @@
 
 #define PTE_P (0x3)
 
+
+#define DOMAIN_NONE 0x0
+#define DOMAIN_CLIENT 0x1
+#define DOMAIN_MANAGER 0x3
 
 #endif

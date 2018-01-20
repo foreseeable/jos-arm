@@ -1,4 +1,4 @@
-/* See COPYRIGHT for copyright information. */
+//copyright@Yiru Chen
 
 #ifndef JOS_KERN_PMAP_H
 #define JOS_KERN_PMAP_H
@@ -11,11 +11,10 @@
 
 extern char bootstacktop[], bootstack[];
 
-extern struct PageInfo *pages;
+extern struct PageInfo pages[];
 extern size_t npages;
 
-extern pde_t *kern_pgdir;
-
+extern pde_t kern_pgdir[];
 
 /* This macro takes a kernel virtual address -- an address that points above
  * KERNBASE, where the machine's maximum 256MB of physical memory is mapped --

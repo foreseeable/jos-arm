@@ -1,35 +1,30 @@
-/* See COPYRIGHT for copyright information. */
-//#include <inc/x86.h>
+//copyright@Yiru Chen
+
 #include <inc/memlayout.h>
 #include <inc/string.h>
 #include <inc/assert.h>
 
 #include <kern/console.h>
 
+// Ref. http://wiki.osdev.org/ARM_RaspberryPi_Tutorial_C
 
-// Memory-Mapped I/O output
+static void cons_intr(int (*proc)(void));
+static void cons_putc(int c);
+
 static inline void mmio_write(uint32_t reg, uint32_t data)
 {
-	*(volatile uint32_t*)reg = data;
+	*(volatile uint32_t *)reg = data;
 }
  
-// Memory-Mapped I/O input
 static inline uint32_t mmio_read(uint32_t reg)
 {
-	return *(volatile uint32_t*)reg;
+	return *(volatile uint32_t *)reg;
 }
- 
-// Loop <delay> times in a way that the compiler won't optimize away
-static inline void delay(int32_t count)
-{
-	asm volatile("__delay_%=: subs %[count], %[count], #1; bne __delay_%=\n"
-		 : "=r"(count): [count]"0"(count) : "cc");
-}
- 
+
 enum
 {
     // The GPIO registers base address.
-    GPIO_BASE = MMIOBASE, // for raspi2 & 3, 0x20200000 for raspi1
+    GPIO_BASE = GPIOBASE,
  
     // The offsets for reach register.
  
@@ -40,7 +35,7 @@ enum
     GPPUDCLK0 = (GPIO_BASE + 0x98),
  
     // The base address for UART.
-    UART0_BASE = GPIO_BASE + PGSIZE, // for raspi2 & 3, 0x20201000 for raspi1
+    UART0_BASE = GPIOBASE + PGSIZE,
  
     // The offsets for reach register for the UART.
     UART0_DR     = (UART0_BASE + 0x00),
@@ -62,8 +57,32 @@ enum
     UART0_ITOP   = (UART0_BASE + 0x88),
     UART0_TDR    = (UART0_BASE + 0x8C),
 };
- 
-void uart_init()
+
+
+static 
+int uart_proc_data()
+{
+    if (mmio_read(UART0_FR) & (1 << 4))
+    	return -1;
+    return mmio_read(UART0_DR);
+}
+
+void
+uart_intr(void)
+{
+	cons_intr(uart_proc_data);
+}
+
+static void
+uart_putc(unsigned char byte)
+{
+	// Wait for UART to become ready to transmit.
+	while ( mmio_read(UART0_FR) & (1 << 5) ) { }
+	mmio_write(UART0_DR, byte);
+}
+
+static void
+uart_init(void)
 {
 	// Disable UART0.
 	mmio_write(UART0_CR, 0x00000000);
@@ -71,11 +90,9 @@ void uart_init()
  
 	// Disable pull up/down for all GPIO pins & delay for 150 cycles.
 	mmio_write(GPPUD, 0x00000000);
-	delay(150);
  
 	// Disable pull up/down for pin 14,15 & delay for 150 cycles.
 	mmio_write(GPPUDCLK0, (1 << 14) | (1 << 15));
-	delay(150);
  
 	// Write 0 to GPPUDCLK0 to make it take effect.
 	mmio_write(GPPUDCLK0, 0x00000000);
@@ -89,8 +106,8 @@ void uart_init()
 	// UART_CLOCK = 3000000; Baud = 115200.
  
 	// Divider = 3000000 / (16 * 115200) = 1.627 = ~1.
-	mmio_write(UART0_IBRD, 1);
 	// Fractional part register = (.627 * 64) + 0.5 = 40.6 = ~40.
+	mmio_write(UART0_IBRD, 1);
 	mmio_write(UART0_FBRD, 40);
  
 	// Enable FIFO & 8 bit data transmissio (1 stop bit, no parity).
@@ -102,41 +119,6 @@ void uart_init()
  
 	// Enable UART0, receive & transfer part of UART.
 	mmio_write(UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
-}
- 
-static void uart_putc(unsigned char c)
-{
-	// Wait for UART to become ready to transmit.
-	while ( mmio_read(UART0_FR) & (1 << 5) ) { }
-	mmio_write(UART0_DR, c);
-}
- 
-static unsigned char uart_getc()
-{
-    // Wait for UART to have received something.
-    while ( mmio_read(UART0_FR) & (1 << 4) ) { }
-    return mmio_read(UART0_DR);
-}
- 
-void uart_puts(const char* str)
-{
-	for (size_t i = 0; str[i] != '\0'; i ++)
-		uart_putc((unsigned char)str[i]);
-}
-
-
-
-static void cons_intr(int (*proc)(void));
-static void cons_putc(int c);
-
-static int uart_proc_data(){
-    if ( mmio_read(UART0_FR) & (1 << 4) )
-	    return -1;
-    return mmio_read(UART0_DR);
-}
-
-void uart_intr(void){
-	cons_intr(uart_proc_data);
 }
 
 
@@ -173,7 +155,8 @@ cons_intr(int (*proc)(void))
 int
 cons_getc(void)
 {
-	int c;
+	unsigned char c;
+
 	// poll for any pending input characters,
 	// so that this function works even when interrupts are disabled
 	// (e.g., when called from the kernel monitor).
