@@ -1,0 +1,454 @@
+Only in .: CODING
+Only in ./conf: lab.mk
+Only in .: .dir-locals.el
+Only in /home/f/JOS-on-Arm/: .DS_Store
+Only in .: fs
+Only in ./.git: COMMIT_EDITMSG
+diff -r ./.git/config /home/f/JOS-on-Arm/.git/config
+7c7
+< 	url = https://pdos.csail.mit.edu/6.828/2016/jos.git
+---
+> 	url = https://github.com/Ireneruru/JOS-on-Arm
+9c9
+< [branch "lab1"]
+---
+> [branch "master"]
+11,20c11
+< 	merge = refs/heads/lab1
+< [remote "jos"]
+< 	url = https://github.com/foreseeable/jos.git
+< 	fetch = +refs/heads/*:refs/remotes/jos/*
+< [remote "master"]
+< 	url = https://github.com/foreseeable/jos-arm.git
+< 	fetch = +refs/heads/*:refs/remotes/master/*
+< [branch "lab2"]
+< 	remote = origin
+< 	merge = refs/heads/lab2
+---
+> 	merge = refs/heads/master
+diff -r ./.git/HEAD /home/f/JOS-on-Arm/.git/HEAD
+1c1
+< ref: refs/heads/lab2
+---
+> ref: refs/heads/master
+Binary files ./.git/index and /home/f/JOS-on-Arm/.git/index differ
+diff -r ./.git/logs/HEAD /home/f/JOS-on-Arm/.git/logs/HEAD
+1,12c1
+< 0000000000000000000000000000000000000000 a14cbfc2d66e311638b6536603b6541614739c3e chenmuge <chenmuge@pku.edu.cn> 1516437123 +0800	clone: from https://pdos.csail.mit.edu/6.828/2016/jos.git
+< a14cbfc2d66e311638b6536603b6541614739c3e 0be9cfddb343b95427367f32fd4b50c4c7033d2b chenmuge <chenmuge@pku.edu.cn> 1516437275 +0800	commit: readme added
+< 0be9cfddb343b95427367f32fd4b50c4c7033d2b 3293547ef72ba575867e79705197a20196cd4d0b chenmuge <chenmuge@pku.edu.cn> 1516477171 +0800	commit: lab1 finished
+< 3293547ef72ba575867e79705197a20196cd4d0b d9196978d43190d391a5ce71c265de3413777634 chenmuge <chenmuge@pku.edu.cn> 1516478430 +0800	checkout: moving from lab1 to lab2
+< d9196978d43190d391a5ce71c265de3413777634 29ce29a8798e4a1059bec798f541912fa6ee71f6 chenmuge <chenmuge@pku.edu.cn> 1516478500 +0800	commit (merge): Merge branch 'lab1' into lab2
+< 29ce29a8798e4a1059bec798f541912fa6ee71f6 1ae30ca6fc7758ed46dae21656fcffe29b16e2d8 chenmuge <chenmuge@pku.edu.cn> 1516483720 +0800	commit: lab2 half
+< 1ae30ca6fc7758ed46dae21656fcffe29b16e2d8 3293547ef72ba575867e79705197a20196cd4d0b chenmuge <chenmuge@pku.edu.cn> 1516483742 +0800	checkout: moving from lab2 to lab1
+< 3293547ef72ba575867e79705197a20196cd4d0b 1ae30ca6fc7758ed46dae21656fcffe29b16e2d8 chenmuge <chenmuge@pku.edu.cn> 1516483781 +0800	checkout: moving from lab1 to lab2
+< 1ae30ca6fc7758ed46dae21656fcffe29b16e2d8 e54c21c60fde32c2773a4255c4da4ec164955c1b chenmuge <chenmuge@pku.edu.cn> 1516484057 +0800	commit: half complete
+< e54c21c60fde32c2773a4255c4da4ec164955c1b d9196978d43190d391a5ce71c265de3413777634 chenmuge <chenmuge@pku.edu.cn> 1516484464 +0800	rebase: checkout refs/remotes/origin/lab2
+< d9196978d43190d391a5ce71c265de3413777634 82cef2d373423dec06d0a55c72d040fce8cbf99e chenmuge <chenmuge@pku.edu.cn> 1516484464 +0800	rebase: readme added
+< 82cef2d373423dec06d0a55c72d040fce8cbf99e e54c21c60fde32c2773a4255c4da4ec164955c1b chenmuge <chenmuge@pku.edu.cn> 1516484494 +0800	rebase: aborting
+---
+> 0000000000000000000000000000000000000000 079ad79c728aeab4b6f1885e6f2d470cd3a99bbc chenmuge <chenmuge@pku.edu.cn> 1516475782 +0800	clone: from https://github.com/Ireneruru/JOS-on-Arm
+Only in ./.git/logs/refs/heads: lab1
+Only in ./.git/logs/refs/heads: lab2
+Only in /home/f/JOS-on-Arm/.git/logs/refs/heads: master
+Only in ./.git/logs/refs/remotes: master
+diff -r ./.git/logs/refs/remotes/origin/HEAD /home/f/JOS-on-Arm/.git/logs/refs/remotes/origin/HEAD
+1c1
+< 0000000000000000000000000000000000000000 a14cbfc2d66e311638b6536603b6541614739c3e chenmuge <chenmuge@pku.edu.cn> 1516437123 +0800	clone: from https://pdos.csail.mit.edu/6.828/2016/jos.git
+---
+> 0000000000000000000000000000000000000000 079ad79c728aeab4b6f1885e6f2d470cd3a99bbc chenmuge <chenmuge@pku.edu.cn> 1516475782 +0800	clone: from https://github.com/Ireneruru/JOS-on-Arm
+Only in ./.git/logs/refs: stash
+Only in ./.git/objects: 00
+Only in ./.git/objects/01: 7b5facd23ba4a7115830e67c684f2339d31f4b
+Only in /home/f/JOS-on-Arm/.git/objects/01: 8aef431e150859bf02ee792a614addbaf9102f
+Only in /home/f/JOS-on-Arm/.git/objects/01: d3bdd6558ad57478bdb691c92bdb1066796780
+Only in /home/f/JOS-on-Arm/.git/objects: 05
+Only in /home/f/JOS-on-Arm/.git/objects: 06
+Only in /home/f/JOS-on-Arm/.git/objects: 07
+Only in /home/f/JOS-on-Arm/.git/objects: 0a
+Only in ./.git/objects: 0b
+Only in /home/f/JOS-on-Arm/.git/objects: 0c
+Only in ./.git/objects: 13
+Only in ./.git/objects: 15
+Only in ./.git/objects: 17
+Only in ./.git/objects: 18
+Only in ./.git/objects: 1a
+Only in /home/f/JOS-on-Arm/.git/objects: 1b
+Only in ./.git/objects: 1e
+Only in /home/f/JOS-on-Arm/.git/objects: 1f
+Only in /home/f/JOS-on-Arm/.git/objects: 21
+Only in /home/f/JOS-on-Arm/.git/objects: 22
+Only in /home/f/JOS-on-Arm/.git/objects: 23
+Only in /home/f/JOS-on-Arm/.git/objects/25: 48060ae014638a7bf5d7faaa3ad35e4fc808f2
+Only in ./.git/objects/25: ab0dfda3271ea2ff1ab5db8096cc155d48adfa
+Only in ./.git/objects: 26
+Only in ./.git/objects: 27
+Only in /home/f/JOS-on-Arm/.git/objects: 28
+Only in ./.git/objects: 29
+Only in /home/f/JOS-on-Arm/.git/objects: 2e
+Only in ./.git/objects: 32
+Only in ./.git/objects: 34
+Only in ./.git/objects: 35
+Only in /home/f/JOS-on-Arm/.git/objects: 37
+Only in /home/f/JOS-on-Arm/.git/objects: 38
+Only in ./.git/objects: 3d
+Only in ./.git/objects: 3e
+Only in ./.git/objects: 41
+Only in ./.git/objects: 43
+Only in /home/f/JOS-on-Arm/.git/objects: 48
+Only in /home/f/JOS-on-Arm/.git/objects: 4a
+Only in ./.git/objects: 4c
+Only in /home/f/JOS-on-Arm/.git/objects: 4d
+Only in /home/f/JOS-on-Arm/.git/objects/4f: 26815886c1b9758b84cd22ce1f09413b67cc38
+Only in ./.git/objects: 51
+Only in ./.git/objects/56: 0e1cbbcdc4b3c482ec066d8a3b1fe7ee1d28dc
+Only in /home/f/JOS-on-Arm/.git/objects/56: 25c0df4ad3bf42f5ef95f585b2cb545e89132b
+Only in /home/f/JOS-on-Arm/.git/objects/56: 7643f5eb2c87aca51c455117389ec9d1f4effd
+Only in ./.git/objects: 5a
+Only in ./.git/objects: 5c
+Only in /home/f/JOS-on-Arm/.git/objects: 60
+Only in ./.git/objects: 62
+Only in ./.git/objects: 63
+Only in ./.git/objects/64: 6d47b80fd2caf470fa48f1f9d3c683eeb88c48
+Only in /home/f/JOS-on-Arm/.git/objects/64: b78136b845128a53ef9576f58626cd5b0e62a8
+Only in /home/f/JOS-on-Arm/.git/objects: 66
+Only in /home/f/JOS-on-Arm/.git/objects: 68
+Only in /home/f/JOS-on-Arm/.git/objects: 69
+Only in ./.git/objects: 71
+Only in ./.git/objects/72: 3cfacd7d557d0b32cb9687133dbb8233a0e72a
+Only in /home/f/JOS-on-Arm/.git/objects/72: 70c39ef04db3c3b364f8c4bd84f0f88f3b785b
+Only in ./.git/objects: 73
+Only in ./.git/objects: 77
+Only in /home/f/JOS-on-Arm/.git/objects/7b: 65726043644587fd6062d9200e7a1b172a19dc
+Only in ./.git/objects/7b: b50401fe1d40e709abf2f8dff693974cd980aa
+Only in /home/f/JOS-on-Arm/.git/objects: 7c
+Only in /home/f/JOS-on-Arm/.git/objects: 7d
+Only in /home/f/JOS-on-Arm/.git/objects/7f: 6bef1c5b3f846ba27aac93e94ab670aa7d7c6d
+Only in ./.git/objects: 80
+Only in /home/f/JOS-on-Arm/.git/objects: 81
+Only in ./.git/objects: 82
+Only in /home/f/JOS-on-Arm/.git/objects: 89
+Only in ./.git/objects: 8e
+Only in ./.git/objects: 8f
+Only in /home/f/JOS-on-Arm/.git/objects: 93
+Only in ./.git/objects: 96
+Only in ./.git/objects: 99
+Only in ./.git/objects: 9e
+Only in /home/f/JOS-on-Arm/.git/objects: 9f
+Only in ./.git/objects/a1: 15c8861e7ce520a33b80123bda25ac0be2f51a
+Only in /home/f/JOS-on-Arm/.git/objects/a1: 4c2a05870492134e140f674bc5d1f27cfce324
+Only in /home/f/JOS-on-Arm/.git/objects/a1: bdc96e859bce1229748023fee0a77d260e09a1
+Only in ./.git/objects: a5
+Only in /home/f/JOS-on-Arm/.git/objects: a7
+Only in /home/f/JOS-on-Arm/.git/objects: a8
+Only in /home/f/JOS-on-Arm/.git/objects: ab
+Only in /home/f/JOS-on-Arm/.git/objects: ac
+Only in /home/f/JOS-on-Arm/.git/objects: b2
+Only in /home/f/JOS-on-Arm/.git/objects: b3
+Only in ./.git/objects: b5
+Only in ./.git/objects: b6
+Only in /home/f/JOS-on-Arm/.git/objects: b8
+Only in /home/f/JOS-on-Arm/.git/objects: bc
+Only in ./.git/objects: be
+Only in ./.git/objects: c4
+Only in /home/f/JOS-on-Arm/.git/objects/c7: ac658bad758286a81a411fa4163a8ae794d90d
+Only in ./.git/objects/c7: ad7b89c2b825549ba968f96abc93414b1d3cb3
+Only in /home/f/JOS-on-Arm/.git/objects: cf
+Only in ./.git/objects: d3
+Only in ./.git/objects: d7
+Only in /home/f/JOS-on-Arm/.git/objects/d9: 6a47b939d64298d58aa60849071d886bf7a972
+Only in /home/f/JOS-on-Arm/.git/objects: dd
+Only in /home/f/JOS-on-Arm/.git/objects: df
+Only in /home/f/JOS-on-Arm/.git/objects: e0
+Only in ./.git/objects: e1
+Only in ./.git/objects: e5
+Only in /home/f/JOS-on-Arm/.git/objects: ed
+Only in /home/f/JOS-on-Arm/.git/objects: ef
+Only in /home/f/JOS-on-Arm/.git/objects: f0
+Only in ./.git/objects: f1
+Only in /home/f/JOS-on-Arm/.git/objects: f3
+Only in /home/f/JOS-on-Arm/.git/objects/f4: bdf2b637ad457217e02e56e085ec24410a95b0
+Only in ./.git/objects/f4: de377b4698c68972bbd99d60418b6d48b5e447
+Only in /home/f/JOS-on-Arm/.git/objects: f5
+Only in ./.git/objects: f9
+Only in /home/f/JOS-on-Arm/.git/objects: fb
+Only in /home/f/JOS-on-Arm/.git/objects: fc
+Only in ./.git/objects: ff
+Only in ./.git/objects/pack: pack-36a893e093f56580045616ce83731c877a2a1780.idx
+Only in ./.git/objects/pack: pack-36a893e093f56580045616ce83731c877a2a1780.pack
+Only in ./.git: ORIG_HEAD
+diff -r ./.git/packed-refs /home/f/JOS-on-Arm/.git/packed-refs
+2,7c2
+< a14cbfc2d66e311638b6536603b6541614739c3e refs/remotes/origin/lab1
+< d9196978d43190d391a5ce71c265de3413777634 refs/remotes/origin/lab2
+< 4f94e0629fe7b98d8802afec705362445b7662e6 refs/remotes/origin/lab3
+< 171ed33e77c7db58370fc4d6e527b86afc80ae8e refs/remotes/origin/lab4
+< 189436a19d8ac8e8164c1eeca0e60293ba12ab6d refs/remotes/origin/lab5
+< 7fc9211fb88f63000a432b338ccbde8b8e255ad3 refs/remotes/origin/lab6
+---
+> 079ad79c728aeab4b6f1885e6f2d470cd3a99bbc refs/remotes/origin/master
+Only in ./.git/refs/heads: lab1
+Only in ./.git/refs/heads: lab2
+Only in /home/f/JOS-on-Arm/.git/refs/heads: master
+Only in ./.git/refs/remotes: master
+diff -r ./.git/refs/remotes/origin/HEAD /home/f/JOS-on-Arm/.git/refs/remotes/origin/HEAD
+1c1
+< ref: refs/remotes/origin/lab1
+---
+> ref: refs/remotes/origin/master
+Only in ./.git/refs: stash
+Only in .: .gitignore
+Only in .: grade-lab1
+Only in .: grade-lab2
+Only in .: gradelib.py
+diff -r ./inc/assert.h /home/f/JOS-on-Arm/inc/assert.h
+1,2c1
+< /* See COPYRIGHT for copyright information. */
+< 
+---
+> //copyright@Yiru Chen
+Only in ./inc: COPYRIGHT
+diff -r ./inc/error.h /home/f/JOS-on-Arm/inc/error.h
+1,2c1
+< /* See COPYRIGHT for copyright information. */
+< 
+---
+> //copyright@Yiru Chen
+Only in ./inc: kbdreg.h
+diff -r ./inc/types.h /home/f/JOS-on-Arm/inc/types.h
+70,71d69
+< #define ARRAY_SIZE(a)	(sizeof(a) / sizeof(a[0]))
+< 
+Only in ./inc: x86.h
+Only in ./kern: console.ch
+diff -r ./kern/entrypgdir.c /home/f/JOS-on-Arm/kern/entrypgdir.c
+1d0
+< #include <inc/mmu.h>
+2a2
+> #include <inc/mmu.h>
+3a4,20
+> pde_t entry_pgdir[NPDENTRIES] __attribute__((aligned(16 * 1024))) = {
+>     [0x0] = 0x00000002,
+>     [0x1] = 0x00100002,
+>     [0x2] = 0x00200002,
+>     [0x3] = 0x00300002,
+>     [0x4] = 0x00400002,
+>     [0x5] = 0x00500002,
+>     [0x6] = 0x00600002,
+>     [0x7] = 0x00700002,
+>     [0x8] = 0x00800002,
+>     [0x9] = 0x00900002,
+>     [0xa] = 0x00a00002,
+>     [0xb] = 0x00b00002,
+>     [0xc] = 0x00c00002,
+>     [0xd] = 0x00d00002,
+>     [0xe] = 0x00e00002,
+>     [0xf] = 0x00f00002,
+5,24c22
+< __attribute__((__aligned__(PGSIZE)))
+< pde_t entry_pgdir[NPDENTRIES] = {
+<     [0x0] = (0x0 << PDXSHIFT) +  0x2,
+<     [0x1] = (0x1 << PDXSHIFT) +  0x2,
+<     [0x2] = (0x2 << PDXSHIFT) +  0x2,
+<     [0x3] = (0x3 << PDXSHIFT) +  0x2,
+<     [0x4] = (0x4 << PDXSHIFT) +  0x2,
+<     [0x5] = (0x5 << PDXSHIFT) +  0x2,
+<     [0x6] = (0x6 << PDXSHIFT) +  0x2,
+<     [0x7] = (0x7 << PDXSHIFT) +  0x2,
+<     [0x8] = (0x8 << PDXSHIFT) +  0x2,
+<     [0x9] = (0x9 << PDXSHIFT) +  0x2,
+<     [0xa] = (0xa << PDXSHIFT) +  0x2,
+<     [0xb] = (0xb << PDXSHIFT) +  0x2,
+<     [0xc] = (0xc << PDXSHIFT) +  0x2,
+<     [0xd] = (0xd << PDXSHIFT) +  0x2,
+<     [0xe] = (0xe << PDXSHIFT) +  0x2,
+<     [0xf] = (0xf << PDXSHIFT) +  0x2,
+< 
+<     [MMIOBASE >> PDXSHIFT] = 0x3f200002,
+---
+>     [GPIOBASE >> 20] = 0x3f200002,
+26,41c24,39
+<     [0xf00] = (0x0 << PDXSHIFT) +  0x2,
+<     [0xf01] = (0x1 << PDXSHIFT) +  0x2,
+<     [0xf02] = (0x2 << PDXSHIFT) +  0x2,
+<     [0xf03] = (0x3 << PDXSHIFT) +  0x2,
+<     [0xf04] = (0x4 << PDXSHIFT) +  0x2,
+<     [0xf05] = (0x5 << PDXSHIFT) +  0x2,
+<     [0xf06] = (0x6 << PDXSHIFT) +  0x2,
+<     [0xf07] = (0x7 << PDXSHIFT) +  0x2,
+<     [0xf08] = (0x8 << PDXSHIFT) +  0x2,
+<     [0xf09] = (0x9 << PDXSHIFT) +  0x2,
+<     [0xf0a] = (0xa << PDXSHIFT) +  0x2,
+<     [0xf0b] = (0xb << PDXSHIFT) +  0x2,
+<     [0xf0c] = (0xc << PDXSHIFT) +  0x2,
+<     [0xf0d] = (0xd << PDXSHIFT) +  0x2,
+<     [0xf0e] = (0xe << PDXSHIFT) +  0x2,
+<     [0xf0f] = (0xf << PDXSHIFT) +  0x2,
+---
+>     [0xf00] = 0x00000002,
+>     [0xf01] = 0x00100002,
+>     [0xf02] = 0x00200002,
+>     [0xf03] = 0x00300002,
+>     [0xf04] = 0x00400002,
+>     [0xf05] = 0x00500002,
+>     [0xf06] = 0x00600002,
+>     [0xf07] = 0x00700002,
+>     [0xf08] = 0x00800002,
+>     [0xf09] = 0x00900002,
+>     [0xf0a] = 0x00a00002,
+>     [0xf0b] = 0x00b00002,
+>     [0xf0c] = 0x00c00002,
+>     [0xf0d] = 0x00d00002,
+>     [0xf0e] = 0x00e00002,
+>     [0xf0f] = 0x00f00002,
+diff -r ./kern/kdebug.c /home/f/JOS-on-Arm/kern/kdebug.c
+120c120
+< 	if (addr >= ULIM) {
+---
+> 	//if (addr >= ULIM) {
+125c125
+< 	} else {
+---
+> 	//} else {
+127,128c127,128
+<   	        panic("User address");
+< 	}
+---
+>   	//        panic("User address");
+> 	//}
+182,186d181
+< 	stab_binsearch(stabs, &lline, &rline, N_SLINE, addr);
+<     if(lline>rline)
+<         return -1;
+<     info->eip_line = stabs[rline].n_desc;
+< 
+Only in /home/f/JOS-on-Arm/kern: kernel.ld.b
+diff -r ./kern/monitor.c /home/f/JOS-on-Arm/kern/monitor.c
+7a8
+> #include <inc/arm.h>
+26c27
+<     { "backtrace","Display the backtrace of the stadck",mon_backtrace},
+---
+> 	{ "backtrace", "Display the call stack backtrace", mon_backtrace }, 
+27a29
+> #define NCOMMANDS (sizeof(commands)/sizeof(commands[0]))
+36c38
+< 	for (i = 0; i < ARRAY_SIZE(commands); i++)
+---
+> 	for (i = 0; i < NCOMMANDS; i++)
+44,45c46,47
+< 	extern char _start[], entry[], etext[], edata[], end[];
+< 
+---
+> 	extern char start[], entry[], etext[], edata[],end[];
+> 	//unsigned int BASE = 0x8000;
+47c49
+< 	cprintf("  _start                  %08x (phys)\n", _start);
+---
+> 	cprintf("  _start                  %08x (phys)\n", start);
+56,60d57
+< inline uint32_t read_r11(void){
+< 	uint32_t r11;
+< 	asm volatile("mov %0, r11" : "=r" (r11));
+< 	return r11;
+< }
+65,84c62,91
+<     cprintf("Stack backtrace:\n");
+<     uint32_t *ebp=(uint32_t*)read_r11();
+<     uint32_t eip=ebp[0];
+<     while(ebp){
+<         cprintf("  ebp %08x  eip %08x  args",ebp,eip);
+<        // for(int i=2;i<7;i++){
+<         //    cprintf("  %08x",ebp[i]);
+<        // }
+<         //cprintf("\n");
+<         struct Eipdebuginfo info;
+<         debuginfo_eip(eip,&info);
+<         cprintf("         %s:%d: %.*s+%d\n",
+<                 info.eip_file,
+<                 info.eip_line,
+<                 info.eip_fn_namelen,
+<                 info.eip_fn_name,
+<                 eip-info.eip_fn_addr);
+<         ebp=(uint32_t*)*(ebp-1);
+<         eip=ebp[0];
+<     }
+---
+> 	uint32_t tmp_ebp = read_r11(), tmp_eip;
+> 	int debuginfo_ret, i;
+> 	struct Eipdebuginfo info;
+> 
+> 	cprintf("Stack backtrace:\n");
+> 
+> 	// in arm, r11 points to ret addr, and old r11 is just below ret addr
+> 
+> 	while (tmp_ebp != 0x0) {
+> 		// ret addr stays just above ebp
+> 		tmp_eip = *((uint32_t*)tmp_ebp);
+> 		cprintf("  ebp %08x", tmp_ebp);
+> 		cprintf("  eip %08x", tmp_eip);
+> 		
+> 		// find the debuginfo of the instruction which ret addr indicates
+> 		// and check whether the debug info is valid
+> 		if (debuginfo_eip(tmp_eip, &info) == 0) {
+> 			cprintf("         %s:%d: %.*s+%d\n", 
+> 					info.eip_file, 
+> 					info.eip_line,
+> 					info.eip_fn_namelen, info.eip_fn_name,
+> 					(int)tmp_eip - (int)info.eip_fn_addr);
+> 		}
+> 		else {
+> 			cprintf("         debuginfo not available\n");
+> 		}
+> 
+> 		// update tmp_ebp
+> 		tmp_ebp = *((uint32_t*)tmp_ebp - 1);
+> 	}
+126c133
+< 	for (i = 0; i < ARRAY_SIZE(commands); i++) {
+---
+> 	for (i = 0; i < NCOMMANDS; i++) {
+diff -r ./kern/pmap.c /home/f/JOS-on-Arm/kern/pmap.c
+42d41
+< 	cprintf("???\n");
+52d50
+< 	cprintf("???\n");
+61d58
+< 	cprintf("-???\n");
+64d60
+< 	cprintf("???\n");
+diff -r ./kern/printf.c /home/f/JOS-on-Arm/kern/printf.c
+13c13
+< 	*cnt++;
+---
+> 	(*cnt)++;
+diff -r ./lib/printfmt.c /home/f/JOS-on-Arm/lib/printfmt.c
+209,211c209,211
+< 			putch('X', putdat);
+< 			putch('X', putdat);
+< 			putch('X', putdat);
+---
+> 			num = getuint(&ap, lflag);
+> 			base = 8;
+> 			goto number;
+diff -r ./lib/string.c /home/f/JOS-on-Arm/lib/string.c
+5,10d4
+< // Using assembly for memset/memmove
+< // makes some difference on real hardware,
+< // but it makes an even bigger difference on bochs.
+< // Primespipe runs 3x faster this way.
+< #define ASM 1
+< 
+120d113
+< 
+129c122
+< 	while (--m >= 0)
+---
+> 	while (m-- > 0)
+Only in .: mergedep.pl
+Only in .: pmap2.c
+Only in .: readme
+Only in /home/f/JOS-on-Arm/: README.md
+Only in /home/f/JOS-on-Arm/: report
+Only in .: test
+Only in .: user
