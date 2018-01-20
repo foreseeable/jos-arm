@@ -7,6 +7,7 @@ SECTIONS
 {
 	/* Link the kernel at this address: "." means the current address */
 	. = 0xF0100000;
+	PROVIDE(start = .);
 
 	/* AT(...) gives the load address of this section, which tells
 	   the boot loader where to load the kernel in physical memory */

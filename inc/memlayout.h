@@ -11,13 +11,6 @@
  * which are relevant to both the kernel and user-mode software.
  */
 
-// Global descriptor numbers
-#define GD_KT     0x08     // kernel text
-#define GD_KD     0x10     // kernel data
-#define GD_UT     0x18     // user text
-#define GD_UD     0x20     // user data
-#define GD_TSS0   0x28     // Task segment selector for CPU 0
-
 /*
  * Virtual memory map:                                Permissions
  *                                                    kernel/user
@@ -47,7 +40,7 @@
  *                     |       Memory-mapped I/O      | RW/--  PTSIZE
  * ULIM, MMIOBASE -->  +------------------------------+ 0xef800000
  *                     |  Cur. Page Table (User R-)   | R-/R-  PTSIZE
- *    UVPT      ---->  +------------------------------+ 0xef400000
+ *    UVPT      ---->  +------------------------------+ show
  *                     |          RO PAGES            | R-/R-  PTSIZE
  *    UPAGES    ---->  +------------------------------+ 0xef000000
  *                     |           RO ENVS            | R-/R-  PTSIZE
@@ -86,12 +79,6 @@
 // All physical memory mapped at this address
 #define	KERNBASE	0xF0000000
 
-// At IOPHYSMEM (640K) there is a 384K hole for I/O.  From the kernel,
-// IOPHYSMEM can be addressed at KERNBASE + IOPHYSMEM.  The hole ends
-// at physical address EXTPHYSMEM.
-#define IOPHYSMEM	0x0A0000
-#define EXTPHYSMEM	0x100000
-
 // Kernel stack.
 #define KSTACKTOP	KERNBASE
 #define KSTKSIZE	(8*PGSIZE)   		// size of a kernel stack
@@ -100,7 +87,7 @@
 // Memory-mapped IO.
 #define MMIOLIM		(KSTACKTOP - PTSIZE)
 #define MMIOBASE	(MMIOLIM - PTSIZE)
-#define GPIOBASE (MMIOBASE - PTSIZE)
+#define GPIOBASE	(MMIOBASE - PTSIZE)
 
 #define ULIM		(GPIOBASE)
 

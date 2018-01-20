@@ -96,7 +96,6 @@ CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 &
 
 # Common linker flags
 # LDFLAGS := -m elf_i386
-LDFLAGS := -m armelf
 
 
 # Linker flags for JOS user programs
@@ -287,7 +286,7 @@ tarball-pref: handin-check
 	rm lab$(LAB)-handin.tar
 	rm /tmp/lab$(LAB)diff.patch
 
-myapi.key:
+myapi.key: warn
 	@echo Get an API key for yourself by visiting $(WEBSUB)/
 	@read -p "Please enter your API key: " k; \
 	if test `echo -n "$$k" |wc -c` = 32 ; then \
@@ -331,4 +330,4 @@ always:
 
 .PHONY: all always \
 	handin git-handin tarball tarball-pref clean realclean distclean grade handin-prep handin-check \
-	warn
+warn
