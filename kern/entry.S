@@ -47,9 +47,9 @@ halt:
 	
 .data
 // boot stack
-         .p2align        12         // force page alignment
+         .p2align        20         // force page alignment
          .globl          bootstack
 bootstack:
-         .space          KSTKSIZE 
+         .space          0x8000 
          .globl          bootstacktop
 bootstacktop:

@@ -90,7 +90,7 @@ boot_alloc(uint32_t n)
 mem_init(void)
 {
 	size_t n;
-	page_init();
+	cprintf("hajimari\n");
 
 	boot_map_region(kern_pgdir, KERNBASE, 0xffffffff - KERNBASE + 1, 0, PDE_1MB_ENTRY|PDE_NONE_U); 
 	kern_pgdir[PDX(KSTACKTOP-KSTKSIZE)] = PADDR(bootstack) | PDE_1MB_ENTRY|PDE_NONE_U;
@@ -103,11 +103,14 @@ mem_init(void)
 			: 
 			: "r"(11), "r"(1)
 			: "r0");
+	cprintf("...\n");
+	/*
 	check_page_free_list();
 	check_page_alloc();
 	check_page();
 	check_kern_pgdir();
 	check_page_installed_pgdir();
+	*/
 }
 
 // --------------------------------------------------------------
