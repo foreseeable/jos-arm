@@ -111,7 +111,6 @@ grade:
 	./grade-lab$(LAB) $(GRADEFLAGS)
 
 tarball: handin-check
-<<<<<<< HEAD
 	git archive --format=tar HEAD > lab$(LAB)-handin.tar
 	git diff $(UPSTREAM)/lab$(LAB) > /tmp/lab$(LAB)diff.patch
 	tar -rf lab$(LAB)-handin.tar /tmp/lab$(LAB)diff.patch
@@ -186,6 +185,3 @@ always:
 .PHONY: all always \
 	handin git-handin tarball tarball-pref clean realclean distclean grade handin-prep handin-check \
 warn
-=======
-	git archive --format=tar HEAD | gzip > lab$(LAB)-handin.tar.gz
->>>>>>> a57a119
