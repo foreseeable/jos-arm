@@ -1,5 +1,3 @@
-/* See COPYRIGHT for copyright information. */
-
 #include <inc/stdio.h>
 #include <inc/string.h>
 #include <inc/assert.h>
@@ -11,13 +9,14 @@
 
 
 void
-i386_init(void)
+arm_init(void)
 {
 	extern char edata[], end[];
 
 	// Before doing anything else, complete the ELF loading process.
 	// Clear the uninitialized global data (BSS) section of our program.
 	// This ensures that all static/global variables start out zero.
+	cprintf("6828 decimal is %o octal!\n", 6828);
 	memset(edata, 0, end - edata);
 
 	// Initialize the console.
@@ -25,6 +24,7 @@ i386_init(void)
 	cons_init();
 
 	cprintf("6828 decimal is %o octal!\n", 6828);
+	cprintf("x=%d y=%d",3);
 
 	// Lab 2 memory management initialization functions
 	mem_init();
@@ -55,7 +55,7 @@ _panic(const char *file, int line, const char *fmt,...)
 	panicstr = fmt;
 
 	// Be extra sure that the machine is in as reasonable state
-	asm volatile("cli; cld");
+	// asm volatile("cli; cld");
 
 	va_start(ap, fmt);
 	cprintf("kernel panic at %s:%d: ", file, line);

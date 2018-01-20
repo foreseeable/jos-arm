@@ -5,7 +5,6 @@
 #include <inc/string.h>
 #include <inc/memlayout.h>
 #include <inc/assert.h>
-#include <inc/x86.h>
 
 #include <kern/console.h>
 #include <kern/monitor.h>
@@ -24,6 +23,7 @@ struct Command {
 static struct Command commands[] = {
 	{ "help", "Display this list of commands", mon_help },
 	{ "kerninfo", "Display information about the kernel", mon_kerninfo },
+    { "backtrace","Display the backtrace of the stadck",mon_backtrace},
 };
 
 /***** Implementations of basic kernel monitor commands *****/
@@ -53,11 +53,35 @@ mon_kerninfo(int argc, char **argv, struct Trapframe *tf)
 		ROUNDUP(end - entry, 1024) / 1024);
 	return 0;
 }
+inline uint32_t read_r11(void){
+	uint32_t r11;
+	asm volatile("mov %0, r11" : "=r" (r11));
+	return r11;
+}
 
 int
 mon_backtrace(int argc, char **argv, struct Trapframe *tf)
 {
-	// Your code here.
+    cprintf("Stack backtrace:\n");
+    uint32_t *ebp=(uint32_t*)read_r11();
+    uint32_t eip=ebp[0];
+    while(ebp){
+        cprintf("  ebp %08x  eip %08x  args",ebp,eip);
+       // for(int i=2;i<7;i++){
+        //    cprintf("  %08x",ebp[i]);
+       // }
+        //cprintf("\n");
+        struct Eipdebuginfo info;
+        debuginfo_eip(eip,&info);
+        cprintf("         %s:%d: %.*s+%d\n",
+                info.eip_file,
+                info.eip_line,
+                info.eip_fn_namelen,
+                info.eip_fn_name,
+                eip-info.eip_fn_addr);
+        ebp=(uint32_t*)*(ebp-1);
+        eip=ebp[0];
+    }
 	return 0;
 }
 
